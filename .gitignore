@@ -2,3 +2,7 @@
 /venv/
 __pycache__/
 .pyc
+.idea
+/gametracker_database.db
+/database.py
+/main_app_requests.py
