@@ -1,0 +1,17 @@
+<html>
+<body>
+<form action = "http://localhost:5000/login" method = "post">
+    <p>Username:</p>
+    <p><input type = "text" name = "name" /></p>
+    <p>PIN:</p>
+    <p><input type = "text" name = "pin" /></p>
+    <p><input type = "submit" value = "submit" /></p>
+    <a href="http://localhost:5000/register">
+        <input type="button" value="Register" />
+    </a>
+    {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+    {% endfor %}
+</form>
+</body>
+</html>
