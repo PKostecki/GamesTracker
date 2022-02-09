@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, request, render_template, flash, Blueprint
+from flask import Flask, redirect, url_for, request, render_template, flash, Blueprint, session
 from database import DatabaseExecutes
 import os
 import bcrypt
@@ -11,6 +11,7 @@ database_executor = DatabaseExecutes(os.path.join("gametracker_database.db"))
 def login():
     if request.method == 'POST':
         user = request.form['name']
+        session["name"] = user
         pin = request.form['pin']
         if check_pin(user, pin):
             return redirect(url_for('dashboard.dashboard'))
