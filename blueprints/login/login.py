@@ -11,9 +11,9 @@ database_executor = DatabaseExecutes(os.path.join("gametracker_database.db"))
 def login():
     if request.method == 'POST':
         user = request.form['name']
-        session["name"] = user
         pin = request.form['pin']
         if check_pin(user, pin):
+            session["name"] = user
             return redirect(url_for('dashboard.dashboard'))
         else:
             flash('Wrong password')

@@ -6,3 +6,6 @@ __pycache__/
 /gametracker_database.db
 /database.py
 /main_app_requests.py
+/templates/
+/flask_session/
+/*_session/
