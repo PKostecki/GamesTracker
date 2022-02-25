@@ -9,7 +9,7 @@ database_executor = DatabaseExecutes(os.path.join("gametracker_database.db"))
 
 
 def check_user_exist(nickname):
-    user_database = database_executor.get_users(
+    user_database = database_executor.select_single_element(
         f"""SELECT user_nickname FROM users WHERE user_nickname = '{nickname}';""")
     try:
         if user_database[0] == nickname:

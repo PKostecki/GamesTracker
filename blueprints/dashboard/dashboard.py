@@ -13,7 +13,7 @@ def dashboard():
             return redirect(url_for('add_game.user_add_game'))
         if request.form['submit_button'] == 'My games':
             print("jezus")
-            return redirect(url_for('add_game.user_add_game')), 201
+            return redirect(url_for('user_games_list.user_games_list'))
     else:
         return render_template('dashboard.html'), 201
 

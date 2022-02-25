@@ -25,7 +25,7 @@ def user_add_game():
         game_id = get_game_id(game)
         user_id = get_user_id()
         add_record(game_id, comleption_date, rate, review, user_id, timestamp)
-        return render_template('add_game.html')
+        return redirect('dashboard')
 
 
 def add_record(game_id, finish_date, record_grade, record_review, user_id, creation_timestamp):
@@ -47,11 +47,11 @@ def add_game_to_database(game):
 
 
 def get_game_id(game):
-    game_id = database_executor.get_users(f"""SELECT game_id FROM games WHERE game_name == '{game}';""")
+    game_id = database_executor.select_single_element(f"""SELECT game_id FROM games WHERE game_name == '{game}';""")
     return game_id[0]
 
 
 def get_user_id():
     user = session["name"]
-    user_id = database_executor.get_users(f"""SELECT user_id FROM users WHERE user_nickname == '{user}';""")
+    user_id = database_executor.select_single_element(f"""SELECT user_id FROM users WHERE user_nickname == '{user}';""")
     return user_id[0]
