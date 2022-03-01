@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, request, session
+from flask import render_template, Blueprint, request, redirect
 from log_required import login_required
 from database import DatabaseExecutes
 import os
@@ -11,7 +11,7 @@ database_executor = DatabaseExecutes(os.path.join("gametracker_database.db"))
 @login_required
 def users():
     if request.method == 'POST':
-        return render_template('users.html')
+        return redirect('user_profile')
     else:
         users_list = get_users_list()
         print(users_list)

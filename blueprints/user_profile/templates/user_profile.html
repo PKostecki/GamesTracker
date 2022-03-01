@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<html>
-<head>
-    <style>
+<style>
 * {
   box-sizing: border-box;
 }
@@ -33,37 +31,27 @@ th, td {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-a:link {
-  color: black;
-  text-decoration: none;
-}
-
-a:visited {
-  color: grey;
-  text-decoration: none;
-}
-
-a:hover {
-  color: black;
-  text-decoration: underline;
-}
-
-a:active {
-  color: black;
-  text-decoration: underline;
-}
 </style>
-</head>
-<body>
+<h1>User: {{ user }}</h1>
+<p>Description: {{description}}</p>
 <div class="row">
     <div class="column">
-        <table><th>Users</th>
-            <tr>{% for user in users %}
+        <table><th>Game</th>
+            <th>Completion date</th>
+            <th>Grade(1-10)</th>
+            <th>Review</th>
+            <tr>{% for game_name, date, grade, record_review in record_info %}
             </tr>
             <tr>
-                <td><a href="user/{{user}}" value = "user">{{user}}</a></td>
+                <td>{{game_name}}</td>
+                <td>{{date}}</td>
+                <td>{{grade}}</td>
+                <td>{{record_review}}</td>
                 {% endfor %}</table>
     </div>
-    </div>
-</body>
+</div>
 {% endblock %}
+
+
+
+

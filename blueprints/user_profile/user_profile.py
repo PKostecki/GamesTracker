@@ -1,22 +1,20 @@
-from flask import render_template, Blueprint, request, session
+from flask import render_template, Blueprint, request
 from log_required import login_required
 from database import DatabaseExecutes
 import os
 
-
-user_games_blueprint = Blueprint("user_games_list", __name__, template_folder='templates')
+user_profile_blueprint = Blueprint("user_profile", __name__, template_folder='templates')
 database_executor = DatabaseExecutes(os.path.join("gametracker_database.db"))
 
 
-@user_games_blueprint.route('', methods=['POST', 'GET'])
+@user_profile_blueprint.route('/<username>', methods=['POST', 'GET'])
 @login_required
-def user_games_list():
+def user(username):
     if request.method == 'POST':
-        if request.form['submit_button'] == 'My games':
-            print("gierczak")
-            return render_template('user_games.html'), 201
+        return render_template('user_profile.html')
     else:
-        records_info = get_record_info()
+        description = get_user_description(username)
+        records_info = get_record_info(username)
         new_games_list = []
         for record_info in records_info:
             game_id = record_info[0]
@@ -24,7 +22,9 @@ def user_games_list():
             new_game_tuple = (game_name, *record_info[1:])
             new_games_list.append(new_game_tuple)
         print(new_games_list)
-        return render_template('user_games.html', record_info=new_games_list), 201
+        print(description)
+        return render_template('user_profile.html', user=username, description=description,
+                               record_info=new_games_list)
 
 
 def get_game_name(game_id):
@@ -35,17 +35,21 @@ def get_game_name(game_id):
     return game_name
 
 
-def get_user_id():
-    user = session["name"]
+def get_user_id(username):
     user_id = database_executor.select_single_element(f"""SELECT user_id FROM users WHERE
-     user_nickname == '{user}';""")
+     user_nickname == '{username}';""")
     return user_id[0]
 
 
-def get_record_info():
-    user_id = get_user_id()
-    print(user_id)
+def get_record_info(username):
+    user_id = get_user_id(username)
     record_info = database_executor.get_records_query(f"""SELECT game_id, game_finish_date, record_grade,
      record_review
      FROM records WHERE user_id == '{user_id}';""")
     return record_info
+
+
+def get_user_description(username):
+    description = database_executor.get_select_list(f"""SELECT description FROM users
+     WHERE user_nickname = '{username}';""")
+    return description[0]
