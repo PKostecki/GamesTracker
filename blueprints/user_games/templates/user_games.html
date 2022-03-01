@@ -1,23 +1,5 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <title>User Records List</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--  <h1>Records list</h1>-->
-<!--  <table>{% for item in date %}-->
-<!--    <tr>-->
-<!--      <td>{{item}}</td>-->
-<!--    </tr>-->
-<!--    {% endfor %}</table>-->
-<!--  <table>{% for item in record_grade %}-->
-<!--    <tr>-->
-<!--      <td>{{item}}</td>-->
-<!--    </tr>-->
-<!--    {% endfor %}</table>-->
-<!--</body>-->
-<!--</html>-->
+{% extends "base.html" %}
+{% block content %}
 <html>
 <head>
   <style>
@@ -74,3 +56,4 @@ tr:nth-child(even) {
   </div>
   </div>
 </body>
+{% endblock %}

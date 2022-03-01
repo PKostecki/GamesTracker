@@ -1,8 +1,9 @@
-from flask import Flask, redirect, url_for, request, render_template, flash, Blueprint
+from flask import redirect, url_for, request, render_template, flash, Blueprint
 from database import DatabaseExecutes
 import os
 import bcrypt
 import time
+
 
 register_blueprint = Blueprint("register", __name__, template_folder='templates')
 database_executor = DatabaseExecutes(os.path.join("gametracker_database.db"))
@@ -32,6 +33,9 @@ def create_account():
         pin = request.form['pin']
         string_hash = create_hash(pin)
         description = request.form['description']
+        if check_forms_length(user) and check_forms_length(pin):
+            flash('Nickname and password must have at least 4 characters')
+            return render_template('register.html')
         if check_user_exist(user):
             flash('Nickname already used')
             return render_template('register.html')
@@ -41,6 +45,12 @@ def create_account():
     else:
         user = request.args.get('name')
         return render_template('register.html')
+
+
+def check_forms_length(checked_string):
+    valid = len(checked_string)
+    if valid < 4:
+        return True
 
 
 def add_user_to_database(nickname, pin, user_description):

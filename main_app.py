@@ -6,6 +6,7 @@ from blueprints.create_account.register import register_blueprint
 from blueprints.dashboard.dashboard import dashboard_blueprint
 from blueprints.user_games.user_games import user_games_blueprint
 from blueprints.user_add_game.add_game import add_game_blueprint
+from blueprints.users.users import users_blueprint
 
 
 app = Flask(__name__, template_folder='templates')
@@ -17,6 +18,7 @@ app.register_blueprint(register_blueprint, url_prefix="/register")
 app.register_blueprint(dashboard_blueprint, url_prefix="/dashboard")
 app.register_blueprint(user_games_blueprint, url_prefix="/userlist")
 app.register_blueprint(add_game_blueprint, url_prefix="/add")
+app.register_blueprint(users_blueprint, url_prefix="/users")
 app.secret_key = config.salted_secret_key
 
 

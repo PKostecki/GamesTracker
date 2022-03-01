@@ -1,0 +1,69 @@
+<html>
+<head>
+  <style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+}
+
+.button1 {
+  background-color: #333;
+  color: white;
+}
+
+.button1:hover {
+  background-color: black;
+  color: white;
+  }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+
+</style>
+</head>
+<body>
+<ul>
+  <form action = "{{ url_for('dashboard.dashboard') }}" method = "post">
+  <li><input type="submit" class="button button1" name="submit_button" value="Home"></li>
+  <li><input type="submit" class="button button1" name="submit_button" value="My games"></li>
+  <li><input type="submit" class="button button1" name="submit_button" value="Add game"></li>
+  <li><input type="submit" class="button button1" name="submit_button" value="Users"></li>
+  </form>
+</ul>
+{% block content %}{% endblock %}
+</body>
+
+</html>
+
+
