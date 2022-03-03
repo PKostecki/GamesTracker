@@ -1,45 +1,17 @@
-<html>
-<head>
-    <style>
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-
-}
-
-.button1 {
-  background-color: #333;
-  color: white;
-}
-
-.button1:hover {
-  background-color: black;
-  color: white;
-  }
-    </style>
-</head>
-<body>
+{% extends "input_template.html" %}
+{% block content %}
 <form action = "http://localhost:5000/login" method = "post">
-    <p>Username:</p>
-    <p><input type = "text" name = "name" /></p>
-    <p>Password:</p>
-    <p><input type = "password" name = "pin" /></p>
-    <p><input type = "submit" class="button button1" value = "submit" /></p>
-    <a href="http://localhost:5000/register">
-        <input type="button" class="button button1" value="Register" />
-    </a>
-    {% for message in get_flashed_messages() %}
-    <div class=flash>{{ message }}</div>
-    {% endfor %}
+    <div class="wrapper">
+        <p><input type = "text" name = "name" placeholder="Username" required /></p>
+        <p><input type = "password" name = "pin" placeholder="password" required /></p>
+        <p><input type = "submit" class="button button1" value = "submit" />
+        <a href="http://localhost:5000/register">
+            <input type="button" class="button button1" value="Register" />
+        </a></p>
+        {% for message in get_flashed_messages() %}
+        <div class=flash>{{ message }}</div>
+        {% endfor %}
+    </div>
 </form>
-</body>
-</html>
+
+{% endblock %}

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+    {% include "input_template.html" %}
 {% block content %}
     <title>AutoComplete</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
@@ -12,19 +13,17 @@
 </head>
 <body>
 <form action = "http://localhost:5000/add" method = "post">
-    <p>Game:</p>
-    <p><input type = "text" id="game" name = "game" /></p>
-    <p>Game completion date:</p>
-    <input type="date" id="completion" name="completion">
-    <p>Your rate(1-10):</p>
-    <input type="number" id="rate" name="rate" min="1" max="10">
-    <p>Review:</p>
-    <textarea id="review" name="review" rows="4" cols="50">
-    </textarea>
-    <p><input type = "submit" class="button button1" value = "submit" /></p>
-    {% for message in get_flashed_messages() %}
-    <div class=flash>{{ message }}</div>
-    {% endfor %}
+    <div class="wrapper">
+        <p><input type = "text" id="game" name = "game" placeholder="Game"/></p>
+        <p>Game finish date:</p>
+        <p><input type="date" id="completion" name="completion" ></p>
+        <p><input type="number" id="rate" name="rate" min="1" max="10" placeholder="Your rate(1-10):"></p>
+        <p><textarea  id="review" name="review" rows="4" cols="50" placeholder="Review"></textarea></p>
+        <p><input type = "submit" class="button button1" value = "submit" /></p>
+        {% for message in get_flashed_messages() %}
+        <div class=flash>{{ message }}</div>
+        {% endfor %}
+    </div>
 </form>
 <script>
   $( function() {

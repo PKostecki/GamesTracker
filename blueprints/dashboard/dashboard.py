@@ -1,5 +1,6 @@
-from flask import render_template, Blueprint, request, redirect, url_for
+from flask import render_template, Blueprint, request, redirect, url_for, session
 from log_required import login_required
+from flask_login import logout_user
 
 dashboard_blueprint = Blueprint("dashboard", __name__, template_folder='templates')
 
@@ -16,7 +17,13 @@ def dashboard():
             return redirect(url_for('user_games_list.user_games_list'))
         if request.form['submit_button'] == 'Users':
             return redirect(url_for('users.users'))
+        if request.form['submit_button'] == 'Logout':
+            session.pop('name', None)
+            return redirect(url_for('login.login'))
     else:
         return render_template('dashboard.html'), 201
+
+
+
 
 

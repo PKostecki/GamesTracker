@@ -13,6 +13,7 @@
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
+  border-radius: 4px;
 
 }
 
@@ -30,6 +31,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  border-radius: 4px;
   background-color: #333;
 }
 
@@ -48,6 +50,10 @@ li a {
 li a:hover {
   background-color: #111;
 }
+body {
+  background-color: white;
+}
+
 
 
 </style>
@@ -59,6 +65,9 @@ li a:hover {
   <li><input type="submit" class="button button1" name="submit_button" value="My games"></li>
   <li><input type="submit" class="button button1" name="submit_button" value="Add game"></li>
   <li><input type="submit" class="button button1" name="submit_button" value="Users"></li>
+  <div style="float:right">
+  <li><input type="submit" class="button button1" name="submit_button" value="Logout"></li>
+  </div>
   </form>
 </ul>
 {% block content %}{% endblock %}
