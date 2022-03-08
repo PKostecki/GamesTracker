@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_session import Session
 import config
 from blueprints.login.login import login_blueprint
@@ -8,7 +8,6 @@ from blueprints.user_games.user_games import user_games_blueprint
 from blueprints.user_add_game.add_game import add_game_blueprint
 from blueprints.users.users import users_blueprint
 from blueprints.user_profile.user_profile import user_profile_blueprint
-
 
 app = Flask(__name__, template_folder='templates')
 app.config["SESSION_PERMANENT"] = False
@@ -22,6 +21,16 @@ app.register_blueprint(add_game_blueprint, url_prefix="/add")
 app.register_blueprint(users_blueprint, url_prefix="/users")
 app.register_blueprint(user_profile_blueprint, url_prefix="/user")
 app.secret_key = config.salted_secret_key
+
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template('500.html'), 500
 
 
 def main():
