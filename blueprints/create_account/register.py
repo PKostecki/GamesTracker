@@ -4,7 +4,6 @@ import os
 import bcrypt
 import time
 
-
 register_blueprint = Blueprint("register", __name__, template_folder='templates')
 database_executor = DatabaseExecutes(os.path.join("gametracker_database.db"))
 
@@ -30,8 +29,10 @@ def create_hash(pin):
 def create_account():
     if request.method == 'POST':
         user = request.form['name']
+        email = request.form['email']
         pin = request.form['pin']
         string_hash = create_hash(pin)
+        print(email)
         description = request.form['description']
         if check_forms_length(user) and check_forms_length(pin):
             flash('Nickname and password must have at least 4 characters')
@@ -40,7 +41,7 @@ def create_account():
             flash('Nickname already used')
             return render_template('register.html')
         else:
-            add_user_to_database(user, string_hash, description)
+            add_user_to_database(user, string_hash, description, email)
             return redirect(url_for('login.login'))
     else:
         user = request.args.get('name')
@@ -53,8 +54,8 @@ def check_forms_length(checked_string):
         return True
 
 
-def add_user_to_database(nickname, pin, user_description):
+def add_user_to_database(nickname, pin, user_description, user_email):
     timestamp = time.time()
     database_executor.execute_query(f"INSERT INTO users(user_nickname, user_pin, description, "
-                                    f"creation_timestamp) VALUES ('{nickname}',"
-                                    f"'{pin}', '{user_description}', '{timestamp}');")
+                                    f"creation_timestamp, user_email) VALUES ('{nickname}',"
+                                    f"'{pin}', '{user_description}', '{timestamp}', '{user_email}');")

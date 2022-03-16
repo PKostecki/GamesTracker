@@ -1,6 +1,5 @@
 from flask import Blueprint
-from . import error_handler
 
-bp = Blueprint('errors', __name__)
+errors_blueprint = Blueprint('errors', __name__, template_folder='templates')
 
-
+from blueprints.errors import error_handler
