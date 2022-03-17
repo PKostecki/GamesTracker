@@ -9,7 +9,13 @@
   <li><input type="submit" class="button button1" name="submit_button" value="My games"></li>
   <li><input type="submit" class="button button1" name="submit_button" value="Add game"></li>
   <li><input type="submit" class="button button1" name="submit_button" value="Users"></li>
-  <li style="float:right"><input type="submit" class="button button1" name="submit_button" value="Logout"></li>
+  <li style="float:right"><div class="dropdown">
+    <button  class="dropbtn" >Menu</button>
+    <div class="dropdown-content">
+      <input type="submit" class="button button2"  name="submit_button" value="Logout">
+    </div>
+  </div></li>
+<!--  <li style="float:right"><input type="submit" class="button button1" name="submit_button" value="Logout"></li>-->
   </form>
 </ul>
 {% block content %}{% endblock %}
