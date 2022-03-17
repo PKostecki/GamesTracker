@@ -10,9 +10,8 @@
 
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
           rel="stylesheet" type="text/css" />
-</head>
 <body>
-<form action = "http://localhost:5000/add" method = "post">
+<form action = "{{url_for('add_game.user_add_game')}}" method = "post">
     <div class="wrapper">
         <p><input type = "text" id="game" name = "game" placeholder="Game" required/></p>
         <p>Game finish date:</p>

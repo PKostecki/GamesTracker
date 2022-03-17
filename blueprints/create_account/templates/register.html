@@ -1,6 +1,6 @@
 {% extends "input_template.html" %}
 {% block content %}
-<form action = "http://localhost:5000/register" method = "post">
+<form action = "{{url_for('register.create_account')}}" method = "post">
     <div class="wrapper">
         <p><input type = "email" name = "email" placeholder="Email" required /></p>
         <p><input type = "text" name = "name" placeholder="Username" required /></p>

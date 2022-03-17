@@ -5,6 +5,7 @@ import jwt
 from flask_mail import Message
 from time import time
 import bcrypt
+import threading
 
 
 email_handler_blueprint = Blueprint("reset", __name__, template_folder='templates')
@@ -22,10 +23,14 @@ def send_pass_reset():
             if check_email_exist(email):
                 token = get_reset_pass_token(email)
                 flash("Email with reset instruction sent")
-                send_email('Password reset', sender=Config.MAIL_USERNAME, recipients=[email],
-                           text_body=render_template('reset_password_message.txt', email=email, token=token),
-                           html_body=render_template('reset_password_message.html', email=email, token=token))
-                print(token)
+                thread = threading.Thread(target=send_email('Password reset', sender=Config.MAIL_USERNAME,
+                                                            recipients=[email],
+                                                            text_body=render_template('reset_password_message.txt',
+                                                                                      email=email, token=token),
+                                                            html_body=render_template('reset_password_message.html',
+                                                                                      email=email, token=token)))
+                thread.daemon = True
+                thread.start()
                 return redirect(url_for('login.login'))
             else:
                 flash('Email doesnt exist')
