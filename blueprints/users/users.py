@@ -14,7 +14,6 @@ def users():
         return redirect('user_profile')
     else:
         users_list = get_users_list()
-        print(users_list)
         return render_template('users.html', users=users_list)
 
 

@@ -4,8 +4,22 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/user_profile_style.css') }}">
 </head>
 <hr>
-<h1>User: {{ user }}</h1>
-<p>Description: {{description}}</p>
+<form action = "{{ url_for('user_profile.user', username=user) }}" method = "post">
+    <div class="div1"><h1>{{ user }}</h1></div>
+    {% if session["name"]==username %}
+    <div style="float:right" class="div2"><button class="button button2 " style="padding: 5px 10px" name="Edit_password" value="Edit_password">Change password <i class="fas fa-wrench"></i></button></div>
+    {% endif %}
+<!--    Edit username-->
+<!--    {% if session["name"]==username %}-->
+<!--    <div class="div2"><button class="button button2 " style="padding: 5px 10px" name="Edit_username" value="Edit_username"><i class="fas fa-edit"></i></button></div>-->
+<!--    {% endif %}-->
+<div class="wrapper">
+    <div class="div1"><p>Description: {{description}}</p></div>
+    {% if session["name"]==username %}
+    <div class="div2"><button class="button button2 " style="padding: 5px 10px" name="Edit_description" value="Edit_description"><i class="fas fa-edit"></i></button></div>
+    {% endif %}
+</div>
+</form>
 <hr>
 <div class="row">
     <div class="column">

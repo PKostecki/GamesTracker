@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, request, redirect, url_for, session
+from flask import render_template, Blueprint, request, redirect, session
 from log_required import login_required
 from database import DatabaseExecutes
 import os

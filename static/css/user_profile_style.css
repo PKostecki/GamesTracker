@@ -28,3 +28,14 @@ th, td {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+.wrapper {
+    width: 500px;
+    overflow: hidden; /* add this to contain floated children */
+}
+.div1 {
+    display: inline-block;
+}
+.div2 {
+    display: inline-block;
+}
+

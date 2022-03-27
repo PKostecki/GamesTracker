@@ -11,6 +11,7 @@ from blueprints.user_profile.user_profile import user_profile_blueprint
 from blueprints.errors import errors_blueprint
 from flask_mail import Mail
 from blueprints.email_handler.email_handler import email_handler_blueprint
+from blueprints.user_changes.user_changes import user_changes_blueprint
 
 
 app = Flask(__name__, template_folder='templates')
@@ -28,6 +29,7 @@ app.register_blueprint(users_blueprint, url_prefix="/users")
 app.register_blueprint(user_profile_blueprint, url_prefix="/user")
 app.register_blueprint(errors_blueprint)
 app.register_blueprint(email_handler_blueprint)
+app.register_blueprint(user_changes_blueprint, url_prefix="/change")
 
 
 def main():

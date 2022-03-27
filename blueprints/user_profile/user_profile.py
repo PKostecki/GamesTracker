@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, request
+from flask import render_template, Blueprint, request, redirect, url_for, session
 from log_required import login_required
 from database import DatabaseExecutes
 import os
@@ -11,7 +11,15 @@ database_executor = DatabaseExecutes(os.path.join("gametracker_database.db"))
 @login_required
 def user(username):
     if request.method == 'POST':
-        return render_template('user_profile.html')
+        session_user = session["name"]
+        if session_user == username:
+            if request.form.get('Edit_username'):
+                return redirect(url_for('dashboard.dashboard'))
+            if request.form.get('Edit_description'):
+                return redirect(url_for('user_changes.change_description', username=username))
+            if request.form.get('Edit_password'):
+                return redirect(url_for('user_changes.change_password', username=username))
+        return render_template('user_profile.html', user=username)
     else:
         description = get_user_description(username)
         records_info = get_record_info(username)
@@ -21,10 +29,8 @@ def user(username):
             game_name = get_game_name(game_id)
             new_game_tuple = (game_name, *record_info[1:])
             new_games_list.append(new_game_tuple)
-        print(new_games_list)
-        print(description)
         return render_template('user_profile.html', user=username, description=description,
-                               record_info=new_games_list)
+                               record_info=new_games_list, username=username)
 
 
 def get_game_name(game_id):

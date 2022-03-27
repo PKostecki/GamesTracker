@@ -1,6 +1,8 @@
 <html>
 <head>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/base_style.css') }}">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <body>
 <ul>
@@ -10,12 +12,12 @@
   <li><input type="submit" class="button button1" name="submit_button" value="Add game"></li>
   <li><input type="submit" class="button button1" name="submit_button" value="Users"></li>
   <li style="float:right"><div class="dropdown">
-    <button  class="dropbtn" >Menu</button>
+    <button  class="dropbtn" disabled>Menu</button>
     <div class="dropdown-content">
+      <input type="submit" class="button button2"  name="submit_button" value="Profile">
       <input type="submit" class="button button2"  name="submit_button" value="Logout">
     </div>
   </div></li>
-<!--  <li style="float:right"><input type="submit" class="button button1" name="submit_button" value="Logout"></li>-->
   </form>
 </ul>
 {% block content %}{% endblock %}

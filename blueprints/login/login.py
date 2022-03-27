@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, request, render_template, flash, Blueprint, session
+from flask import redirect, url_for, request, render_template, flash, Blueprint, session
 from database import DatabaseExecutes
 import os
 import bcrypt
@@ -19,7 +19,6 @@ def login():
             flash('Wrong password')
             return render_template('login.html')
     else:
-        user = request.args.get('name')
         return render_template('login.html')
 
 

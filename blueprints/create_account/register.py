@@ -32,7 +32,6 @@ def create_account():
         email = request.form['email']
         pin = request.form['pin']
         string_hash = create_hash(pin)
-        print(email)
         description = request.form['description']
         if check_forms_length(user) and check_forms_length(pin):
             flash('Nickname and password must have at least 4 characters')
@@ -44,7 +43,6 @@ def create_account():
             add_user_to_database(user, string_hash, description, email)
             return redirect(url_for('login.login'))
     else:
-        user = request.args.get('name')
         return render_template('register.html')
 
 

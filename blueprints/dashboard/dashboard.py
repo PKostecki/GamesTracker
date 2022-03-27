@@ -22,6 +22,9 @@ def dashboard():
         if request.form['submit_button'] == 'Logout':
             session.pop('name', None)
             return redirect(url_for('login.login'))
+        if request.form['submit_button'] == 'Profile':
+            user = session["name"]
+            return redirect(url_for('user_profile.user', username=user))
     else:
         record_info = get_records()
         last_records_list = []
@@ -50,4 +53,3 @@ def get_game_name(game_id):
 def get_user(user_id):
     user = database_executor.get_select_list(f"""SELECT user_nickname FROM users WHERE user_id = '{user_id}';""")
     return user
-

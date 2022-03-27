@@ -13,7 +13,6 @@ database_executor = DatabaseExecutes(os.path.join("gametracker_database.db"))
 def user_games_list():
     if request.method == 'POST':
         if request.form['submit_button'] == 'My games':
-            print("gierczak")
             return render_template('user_games.html'), 201
     else:
         records_info = get_record_info()
@@ -44,7 +43,6 @@ def get_user_id():
 
 def get_record_info():
     user_id = get_user_id()
-    print(user_id)
     record_info = database_executor.get_records_query(f"""SELECT game_id, game_finish_date, record_grade,
      record_review
      FROM records WHERE user_id == '{user_id}';""")
