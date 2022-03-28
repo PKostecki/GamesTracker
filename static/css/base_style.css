@@ -115,4 +115,14 @@ li a:hover {
   display: block;
 }
 
+.wrapper {
+    overflow: hidden; /* add this to contain floated children */
+}
+.div1 {
+    display: inline-block;
+}
+.div2 {
+    display: inline-block;
+}
+
 

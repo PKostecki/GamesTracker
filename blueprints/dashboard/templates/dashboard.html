@@ -5,11 +5,18 @@
 </head>
 <body>
 <hr>
-<div style="float:center">
-    <table><h1>Recently:</h1>
-    <tr>{% for game_name, grade, user in last_records_list %}</tr>
-    <h4>{{user}} rated {{game_name}} for {{grade}}/10</h4>
-        {% endfor %}</table>
+<div class="wrapper">
+    <div class="div1">
+        <iframe width="720" height="480"
+                src="{{video}}">
+        </iframe>
+    </div>
+    <div class="div2" style="position:relative;top:-160px;font-size:24px">
+        <table><h1>Recently:</h1>
+            <tr>{% for game_name, grade, user in last_records_list %}</tr>
+            <h4>{{user}} rated {{game_name}} for {{grade}}/10</h4>
+            {% endfor %}</table>
+    </div>
 </div>
 <hr>
 </body>

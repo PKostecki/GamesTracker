@@ -2,6 +2,8 @@ from flask import render_template, Blueprint, request, redirect, url_for, sessio
 from log_required import login_required
 from database import DatabaseExecutes
 import os
+from youtubesearchpython import VideosSearch
+import re
 
 dashboard_blueprint = Blueprint("dashboard", __name__, template_folder='templates')
 database_executor = DatabaseExecutes(os.path.join("gametracker_database.db"))
@@ -33,7 +35,16 @@ def dashboard():
             user = get_user(user_id)
             last_record_tuple = (game_name, grade, *user)
             last_records_list.append(last_record_tuple)
-        return render_template('dashboard.html', last_records_list=last_records_list[-5:]), 201
+        videoSearch = VideosSearch(last_records_list[-1:][0][0] + "trailer", limit=1)
+        video = videoSearch.result()['result'][0]['link']
+        embed_link = modify_yt_link(video)
+        return render_template('dashboard.html', last_records_list=last_records_list[-5:], video=embed_link), 201
+
+
+def modify_yt_link(video_url):
+    # url = video_url.replace("watch?v=", "embed/")
+    regex = re.compile(r"(?:https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)", re.I)
+    return re.sub(regex, r"https://www.youtube.com/embed/\1", video_url)
 
 
 def get_records():
