@@ -31,3 +31,5 @@ urllib3==1.26.8
 Werkzeug==2.0.2
 WTForms==3.0.1
 youtube-search-python==1.6.3
+
+SQLAlchemy~=1.4.32

@@ -35,15 +35,21 @@ def dashboard():
             user = get_user(user_id)
             last_record_tuple = (game_name, grade, *user)
             last_records_list.append(last_record_tuple)
-        videoSearch = VideosSearch(last_records_list[-1:][0][0] + "trailer", limit=1)
-        video = videoSearch.result()['result'][0]['link']
-        embed_link = modify_yt_link(video)
-        return render_template('dashboard.html', last_records_list=last_records_list[-5:], video=embed_link), 201
+        embed_link = 'https://www.youtube.com/embed/oWYp1xRPH5g'
+        try:
+            videoSearch = VideosSearch(last_records_list[-1:][0][0] + "game trailer", limit=1)
+            video = videoSearch.result()['result'][0]['link']
+            embed_link = modify_yt_link(video)
+        except:
+            print('There are no records')
+            pass
+        return render_template('dashboard.html', last_records_list=last_records_list[-5:],
+                               video=embed_link), 201
 
 
 def modify_yt_link(video_url):
     # url = video_url.replace("watch?v=", "embed/")
-    regex = re.compile(r"(?:https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)", re.I)
+    regex = re.compile(r"(?:https://)?(?:www\.)?(?:youtube\.com|youtu\.be)/(?:watch\?v=)?(.+)", re.I)
     return re.sub(regex, r"https://www.youtube.com/embed/\1", video_url)
 
 
@@ -62,5 +68,6 @@ def get_game_name(game_id):
 
 
 def get_user(user_id):
-    user = database_executor.get_select_list(f"""SELECT user_nickname FROM users WHERE user_id = '{user_id}';""")
+    user = database_executor.get_select_list(
+        f"""SELECT user_nickname FROM users WHERE user_id = '{user_id}';""")
     return user
