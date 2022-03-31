@@ -26,7 +26,10 @@ def check_pin(nickname, pin):
     user_pin_hash = database_executor.select_single_element(
         f"""SELECT user_pin FROM users WHERE user_nickname = '{nickname}';""")
     # user_pin = select_single_element("""SELECT user_pin FROM users WHERE user_nickname = :nickname;""")
-    password_bytes = pin.encode()
-    hash_bytes = user_pin_hash[0].encode()
-    does_match = bcrypt.checkpw(password_bytes, hash_bytes)
-    return does_match
+    if user_pin_hash is None:
+        return False
+    else:
+        password_bytes = pin.encode()
+        hash_bytes = user_pin_hash[0].encode()
+        does_match = bcrypt.checkpw(password_bytes, hash_bytes)
+        return does_match
