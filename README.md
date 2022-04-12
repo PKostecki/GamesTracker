@@ -1,1 +1,1 @@
-# [gamestracker.me](gamestracker.me)
+# [gamestracker.me](https://gamestracker.me/)
